@@ -20,9 +20,16 @@ func _process(delta):
         print(down)
     
     var movement = Vector2(right, down).normalized().rotated(dir)*speed
-    move_and_slide(movement)
     
     var to_center = (get_parent().global_position - global_position)
+    
+    var mass = 10000
+    var centrifugal_force = mass*pow(get_parent().get_parent().get_parent().angular_velocity, 2)/to_center.length()
+    #print(centrifugal_force)
+    movement -= centrifugal_force*to_center.normalized()
+    
+    move_and_slide(movement)
+    
     var forward = to_center.rotated(PI/2).normalized()
     var projected = movement.dot(forward)
     #torque = projected/500#/500*(500-position.length())/150.0
