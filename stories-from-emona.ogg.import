@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/stories-from-emona.ogg-423cf56a9549cafe5825cc04153bd039.oggstr"
+
+[deps]
+
+source_file="res://stories-from-emona.ogg"
+dest_files=[ "res://.import/stories-from-emona.ogg-423cf56a9549cafe5825cc04153bd039.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
