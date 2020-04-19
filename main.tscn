@@ -71,9 +71,9 @@ position = Vector2( -3.94238, -0.707062 )
 scale = Vector2( 0.574841, 0.574841 )
 texture = ExtResource( 1 )
 
-[node name="Player" parent="RecordPlayer/Record" instance=ExtResource( 5 )]
-position = Vector2( -338.865, 27.578 )
-scale = Vector2( 1.02511, 1.02511 )
+[node name="Player" parent="RecordPlayer" instance=ExtResource( 5 )]
+position = Vector2( -474.433, -272.469 )
+scale = Vector2( 0.769231, 0.769231 )
 
 [node name="Arm" type="Sprite" parent="RecordPlayer"]
 position = Vector2( 339.634, -211.064 )
@@ -85,12 +85,12 @@ offset = Vector2( -104.553, 197.862 )
 [node name="Speed" type="Node2D" parent="RecordPlayer"]
 
 [node name="Label" type="Label" parent="RecordPlayer/Speed"]
-margin_left = 230.56
+margin_left = 235.945
 margin_top = 297.455
-margin_right = 397.56
+margin_right = 402.945
 margin_bottom = 376.455
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.372549, 0.372549, 0.372549, 1 )
+custom_colors/font_color = Color( 0.72549, 0.709804, 0.317647, 1 )
 text = "100%"
 align = 1
 __meta__ = {
@@ -128,6 +128,11 @@ points = PoolVector2Array( 195.841, 337.151, 436.527, 336.693 )
 width = 3.0
 default_color = Color( 0.321569, 0.341176, 0.352941, 1 )
 
+[node name="Line2" type="Line2D" parent="RecordPlayer/Speed"]
+points = PoolVector2Array( 304.943, 336.975, 330.961, 336.888 )
+width = 3.0
+default_color = Color( 0.72549, 0.709804, 0.317647, 1 )
+
 [node name="Slider" type="Node2D" parent="RecordPlayer/Speed"]
 position = Vector2( 195.726, 337.475 )
 scale = Vector2( 0.769231, 0.769231 )
@@ -137,7 +142,6 @@ margin_left = -2.23303
 margin_top = -15.7346
 margin_right = 5.76697
 margin_bottom = 20.2654
-color = Color( 0.0745098, 0.0823529, 0.0784314, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
