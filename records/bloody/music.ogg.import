@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/music.ogg-c36f21bf7037a271dd66f15a67bd755a.oggstr"
+
+[deps]
+
+source_file="res://records/bloody/music.ogg"
+dest_files=[ "res://.import/music.ogg-c36f21bf7037a271dd66f15a67bd755a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

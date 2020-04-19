@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/good.wav-0bb6f48d4d550be428e87d6e8bd99c6a.sample"
+
+[deps]
+
+source_file="res://records/writespace/good.wav"
+dest_files=[ "res://.import/good.wav-0bb6f48d4d550be428e87d6e8bd99c6a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

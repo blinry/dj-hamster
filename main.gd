@@ -5,7 +5,7 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
-var spectrum
+#var spectrum
 var pitch = 0.000001
 var prev_m = Vector2(0,0)
 
@@ -14,18 +14,31 @@ var arm_rotation_end = 22
 
 var angular_velocity = 0
 
+var record_id = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    $Music.play()
-    $Music.pitch_scale = pitch
-    spectrum = AudioServer.get_bus_effect_instance(0,0)
+    randomize()
+    #print("ok")
+    load_record(0)
+    #print("ok")
+    #$Music.play()
+    #$Music.pitch_scale = pitch
+    #spectrum = AudioServer.get_bus_effect_instance(0,0)
 
 func _input(event):
 #    if event.is_action_pressed("left"):
 #        $AudioStreamPlayer2D.seek($AudioStreamPlayer2D.get_playback_position()-30)
 #    if event.is_action_pressed("right"):
 #        $AudioStreamPlayer2D.seek($AudioStreamPlayer2D.get_playback_position()+30)
-    pass
+    if event.is_action_pressed("next"):
+        record_id = (record_id+1)%len(records())
+        load_record(record_id)
+    if event.is_action_pressed("prev"):
+        record_id = (record_id-1)%len(records())
+        load_record(record_id)
+    if event.is_action_pressed("ui_accept"):
+        angular_velocity = 1
 
 func _process(delta):
     var m = get_global_mouse_position()
@@ -36,9 +49,14 @@ func _process(delta):
         var rotational_inertia = 100
         var angular_acceleration = $RecordPlayer/Player.torque/rotational_inertia
         angular_velocity += angular_acceleration
-        var to_hamster = $RecordPlayer/Player.global_position-$RecordPlayer/Record.global_position
-        var forward = to_hamster.rotated(PI/2).normalized()
-        $RecordPlayer/Player.move_and_slide(forward*angular_velocity*to_hamster.length())
+    
+    pull_with($RecordPlayer/Player)
+    for t in get_tree().get_nodes_in_group("powerup"):
+        pull_with(t)
+    for t in get_tree().get_nodes_in_group("powerdown"):
+        pull_with(t)
+    
+    
     angular_velocity -= 0.05*delta*angular_velocity
     
     pitch = angular_velocity
@@ -60,7 +78,13 @@ func _process(delta):
 
     #pitch *= 0.999
     #print(pitch)
-    $Music.pitch_scale = pitch
+    
+    if golden():
+        $Music.pitch_scale = 1
+    elif pitch < 1:
+        $Music.pitch_scale = pitch/0.9
+    elif pitch > 1:
+        $Music.pitch_scale = pitch/1.1
     
     $RecordPlayer/Record.rotation += delta*angular_velocity
     #$RecordPlayer/Player.rotation -= delta*angular_velocity
@@ -71,10 +95,55 @@ func _process(delta):
     prev_m = m
 
 
-    if randi() % 200 == 0 and golden() and len(get_tree().get_nodes_in_group("cherries")) < 3:
-        var c = preload("res://cherry.tscn").instance()
+    var name = records()[record_id]
+    if randi() % 100 == 0 and golden() and len(get_tree().get_nodes_in_group("powerup")) < 3:
+        var c = preload("res://powerup.tscn").instance()
         c.position = Vector2(rand_range(-400, 400), rand_range(-400, 400))
-        $RecordPlayer/Record.add_child(c)
-
+        c.find_node("Image").texture = load("res://records/"+name+"/good.png")
+        c.find_node("PickupSound").set_stream(load("res://records/"+name+"/good.wav"))
+        $RecordPlayer.add_child(c)
+    if randi() % 100 == 0 and golden() and len(get_tree().get_nodes_in_group("powerdown")) < 3:
+        var c = preload("res://powerdown.tscn").instance()
+        c.position = Vector2(rand_range(-400, 400), rand_range(-400, 400))
+        c.find_node("Image").texture = load("res://records/"+name+"/bad.png")
+        c.find_node("PickupSound").set_stream(load("res://records/"+name+"/bad.wav"))
+        $RecordPlayer.add_child(c)
+    
+func pull_with(t):
+    if t.global_position.distance_to($RecordPlayer/Record.global_position) < 500:
+        var to_hamster = t.global_position-$RecordPlayer/Record.global_position
+        var forward = to_hamster.rotated(PI/2).normalized()
+        t.move(forward*angular_velocity*to_hamster.length())
+    
 func golden():
     return pitch > 0.9 and pitch < 1.1
+
+func records2():
+    return ["darkest-child","digya"]
+
+func records():
+    #var tscn_regex = RegEx.new()
+    #tscn_regex.compile("\\.ogg$")
+    var levels = []
+    var level_dir = Directory.new()
+    level_dir.open("records")
+    level_dir.list_dir_begin(true)
+    var level = level_dir.get_next()
+    while level != "":
+        #if tscn_regex.search(level):
+        levels.push_back(level)
+        level = level_dir.get_next()
+    #print(levels)
+    return levels
+
+func load_record(n):
+    var name = records()[n]
+    #print(name)
+    $RecordPlayer/Record/Label.texture = load("res://records/"+name+"/label.png")
+    $Music.set_stream(load("res://records/"+name+"/music.ogg"))
+    $Music.seek(0)
+    pitch = 0.00001
+    angular_velocity = 0.00001
+    $Music.pitch_scale = pitch
+    $Music.play()
+    $RecordName.text = name

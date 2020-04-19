@@ -6,6 +6,9 @@ var torque = 0
 
 func _ready():
     pass
+    
+func move(d):
+    move_and_slide(d)
 
 func _process(delta):
     #dir = atan2(position.y, position.x) + get_parent().rotation

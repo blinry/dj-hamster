@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/good.wav-8e3a447b4e1b8d3efd032421e98d0be1.sample"
+
+[deps]
+
+source_file="res://records/bloody/good.wav"
+dest_files=[ "res://.import/good.wav-8e3a447b4e1b8d3efd032421e98d0be1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

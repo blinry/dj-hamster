@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bad.wav-ecdc067cfe10413ea0284cf56865e8c5.sample"
+
+[deps]
+
+source_file="res://records/1room/bad.wav"
+dest_files=[ "res://.import/bad.wav-ecdc067cfe10413ea0284cf56865e8c5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

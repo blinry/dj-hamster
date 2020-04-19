@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/music.ogg-5815bea88ae5cfaacf2ced4c4368f765.oggstr"
+
+[deps]
+
+source_file="res://records/capitalist-piggies/music.ogg"
+dest_files=[ "res://.import/music.ogg-5815bea88ae5cfaacf2ced4c4368f765.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

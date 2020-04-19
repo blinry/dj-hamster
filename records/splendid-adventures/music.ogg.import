@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/music.ogg-b005328e27673b04f557105728180265.oggstr"
+
+[deps]
+
+source_file="res://records/splendid-adventures/music.ogg"
+dest_files=[ "res://.import/music.ogg-b005328e27673b04f557105728180265.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
