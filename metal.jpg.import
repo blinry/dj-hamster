@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/space-invaders.jpg-c2803314dd28f538069b8fe2d8e77f23.stex"
+path="res://.import/metal.jpg-6935a057969eb20003249daac26425d4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://space-invaders.jpg"
-dest_files=[ "res://.import/space-invaders.jpg-c2803314dd28f538069b8fe2d8e77f23.stex" ]
+source_file="res://metal.jpg"
+dest_files=[ "res://.import/metal.jpg-6935a057969eb20003249daac26425d4.stex" ]
 
 [params]
 

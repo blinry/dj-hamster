@@ -51,6 +51,6 @@ free = true
 [node name="Next" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Next"]
-position = Vector2( 1965.96, 539.955 )
+position = Vector2( 1941.59, 541.309 )
 shape = SubResource( 4 )
 [connection signal="body_entered" from="Next" to="." method="_on_Next_body_entered"]

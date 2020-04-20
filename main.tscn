@@ -1,37 +1,46 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://clip_label.tres" type="Material" id=1]
 [ext_resource path="res://main.gd" type="Script" id=2]
 [ext_resource path="res://static.ogg" type="AudioStream" id=3]
 [ext_resource path="res://montserrat-bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://records/splendid-adventures/good.wav" type="AudioStream" id=6]
 [ext_resource path="res://cover.gd" type="Script" id=7]
 [ext_resource path="res://arm.png" type="Texture" id=8]
+[ext_resource path="res://table.jpg" type="Texture" id=9]
 [ext_resource path="res://record.png" type="Texture" id=10]
+[ext_resource path="res://metal.jpg" type="Texture" id=11]
+[ext_resource path="res://paper.jpg" type="Texture" id=12]
+[ext_resource path="res://butterbelly.ttf" type="DynamicFontData" id=13]
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 42.4775
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
-font_data = ExtResource( 4 )
+font_data = ExtResource( 13 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 50
-font_data = ExtResource( 4 )
+size = 40
+font_data = ExtResource( 13 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 12.9194, 537.076 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 535.636, 455.705 )
+extents = Vector2( 685.371, 544.824 )
 
 [sub_resource type="DynamicFont" id=5]
-size = 30
+size = 35
 font_data = ExtResource( 4 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="table" type="Sprite" parent="."]
+position = Vector2( 960, 538.519 )
+texture = ExtResource( 9 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 
@@ -39,7 +48,7 @@ script = ExtResource( 2 )
 stream = ExtResource( 3 )
 
 [node name="RecordPlayer" type="Node2D" parent="."]
-position = Vector2( 992.974, 597.929 )
+position = Vector2( 992.974, 555.929 )
 scale = Vector2( 1.3, 1.3 )
 
 [node name="ColorRect2" type="ColorRect" parent="RecordPlayer"]
@@ -52,15 +61,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="RecordPlayer"]
-margin_left = -538.0
-margin_top = -395.0
-margin_right = 491.0
-margin_bottom = 378.0
-color = Color( 0.176471, 0.180392, 0.188235, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="metal" type="Sprite" parent="RecordPlayer"]
+modulate = Color( 0.603922, 0.603922, 0.603922, 1 )
+position = Vector2( -24.4516, -9.31907 )
+scale = Vector2( 0.239223, 0.239226 )
+texture = ExtResource( 11 )
 
 [node name="Record" type="Sprite" parent="RecordPlayer"]
 position = Vector2( -149.709, -6.34885 )
@@ -85,6 +90,7 @@ __meta__ = {
 [node name="Player" parent="RecordPlayer" instance=ExtResource( 5 )]
 position = Vector2( 711.529, 224.262 )
 scale = Vector2( 0.769231, 0.769231 )
+collision_layer = 3
 
 [node name="Arm" type="Sprite" parent="RecordPlayer"]
 position = Vector2( 339.634, -211.064 )
@@ -102,12 +108,12 @@ shape = SubResource( 3 )
 [node name="Speed" type="Node2D" parent="RecordPlayer"]
 
 [node name="Label" type="Label" parent="RecordPlayer/Speed"]
-margin_left = 235.945
+margin_left = 236.001
 margin_top = 297.455
-margin_right = 402.945
+margin_right = 403.001
 margin_bottom = 376.455
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.72549, 0.709804, 0.317647, 1 )
+custom_colors/font_color = Color( 0.576471, 0.556863, 0.556863, 1 )
 text = "100%"
 align = 1
 __meta__ = {
@@ -120,7 +126,7 @@ margin_top = 296.033
 margin_right = 283.229
 margin_bottom = 375.033
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.372549, 0.372549, 0.372549, 1 )
+custom_colors/font_color = Color( 0.576471, 0.556863, 0.556863, 1 )
 text = "0%"
 align = 1
 __meta__ = {
@@ -133,7 +139,7 @@ margin_top = 298.853
 margin_right = 524.821
 margin_bottom = 377.853
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.372549, 0.372549, 0.372549, 1 )
+custom_colors/font_color = Color( 0.576471, 0.556863, 0.556863, 1 )
 text = "200%"
 align = 1
 __meta__ = {
@@ -141,35 +147,48 @@ __meta__ = {
 }
 
 [node name="Line" type="Line2D" parent="RecordPlayer/Speed"]
-points = PoolVector2Array( 195.841, 337.151, 436.527, 336.693 )
-width = 3.0
-default_color = Color( 0.321569, 0.341176, 0.352941, 1 )
+points = PoolVector2Array( 195.841, 337.151, 436.761, 337.271 )
+width = 5.0
+default_color = Color( 0.341176, 0.313726, 0.313726, 1 )
 
 [node name="Line2" type="Line2D" parent="RecordPlayer/Speed"]
-points = PoolVector2Array( 304.943, 336.975, 330.961, 336.888 )
-width = 3.0
-default_color = Color( 0.72549, 0.709804, 0.317647, 1 )
+scale = Vector2( 1, 1 )
+points = PoolVector2Array( 305.054, 337.245, 331.024, 337.301 )
+width = 5.0
+default_color = Color( 0.768627, 0.74902, 0.215686, 1 )
 
 [node name="Slider" type="Node2D" parent="RecordPlayer/Speed"]
 position = Vector2( 195.726, 337.475 )
 scale = Vector2( 0.769231, 0.769231 )
 
 [node name="ColorRect" type="ColorRect" parent="RecordPlayer/Speed/Slider"]
-margin_left = -2.23303
-margin_top = -15.7346
-margin_right = 5.76697
-margin_bottom = 20.2654
+margin_left = -4.1571
+margin_top = -13.6539
+margin_right = 3.8429
+margin_bottom = 11.3461
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Display" type="Node2D" parent="RecordPlayer"]
+
+[node name="ColorRect" type="ColorRect" parent="RecordPlayer/Display"]
+margin_left = 378.0
+margin_top = -381.0
+margin_right = 478.0
+margin_bottom = -343.0
+color = Color( 0.0745098, 0.0823529, 0.0784314, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Points" type="Label" parent="."]
-margin_left = 1325.26
-margin_top = 50.9883
-margin_right = 1889.26
-margin_bottom = 129.988
+margin_left = 1328.69
+margin_top = 57.9174
+margin_right = 1605.69
+margin_bottom = 136.917
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.713726, 0.552941, 0.156863, 1 )
 text = "0"
 align = 2
 uppercase = true
@@ -197,48 +216,55 @@ __meta__ = {
 [node name="Next" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Next"]
-position = Vector2( 1965.96, 539.955 )
-shape = SubResource( 4 )
-
-[node name="Prev" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Prev"]
-position = Vector2( -44.8624, 538.794 )
+position = Vector2( 1936.32, 538.158 )
 shape = SubResource( 4 )
 
 [node name="Cover" type="Node2D" parent="."]
 z_index = 2
 script = ExtResource( 7 )
 
-[node name="ColorRect" type="ColorRect" parent="Cover"]
-margin_left = 386.0
-margin_top = 141.0
-margin_right = 1268.0
-margin_bottom = 1023.0
-color = Color( 0.878431, 0.878431, 0.745098, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="paper" type="Sprite" parent="Cover"]
+self_modulate = Color( 0.427451, 0.356863, 0.356863, 1 )
+position = Vector2( 799.716, 545.8 )
+scale = Vector2( 0.50627, 0.763184 )
+texture = ExtResource( 12 )
+
+[node name="paper2" type="Sprite" parent="Cover/paper"]
+position = Vector2( -0.251685, -2.38409 )
+scale = Vector2( 0.999447, 0.997583 )
+texture = ExtResource( 12 )
 
 [node name="Area2D" type="Area2D" parent="Cover"]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cover/Area2D"]
-position = Vector2( 820.742, 580.106 )
+visible = false
+position = Vector2( 960.742, 540.106 )
 shape = SubResource( 6 )
 
 [node name="Label" type="Label" parent="Cover"]
-margin_left = 418.0
-margin_top = 173.0
-margin_right = 1223.0
-margin_bottom = 978.0
+margin_left = 357.0
+margin_top = 92.0
+margin_right = 1240.0
+margin_bottom = 989.0
 custom_fonts/font = SubResource( 5 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.247059, 0.247059, 0.247059, 1 )
 text = "Lorem
 Ipsum"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Turn" type="AudioStreamPlayer" parent="Cover"]
+stream = ExtResource( 6 )
+volume_db = -8.0
+
+[node name="ResetTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+[connection signal="finished" from="Music" to="." method="initiate_reset"]
 [connection signal="body_entered" from="Next" to="." method="next"]
-[connection signal="body_entered" from="Prev" to="." method="prev"]
 [connection signal="body_entered" from="Cover/Area2D" to="Cover" method="hideCover"]
+[connection signal="timeout" from="ResetTimer" to="." method="reset_arm"]

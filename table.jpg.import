@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stories-from-emona.jpg-2ab39afdce135a099f8ba26311ade240.stex"
+path="res://.import/table.jpg-1f03ddcc082edb02861d0f5d3fdd3d3c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://stories-from-emona.jpg"
-dest_files=[ "res://.import/stories-from-emona.jpg-2ab39afdce135a099f8ba26311ade240.stex" ]
+source_file="res://table.jpg"
+dest_files=[ "res://.import/table.jpg-1f03ddcc082edb02861d0f5d3fdd3d3c.stex" ]
 
 [params]
 

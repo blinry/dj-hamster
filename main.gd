@@ -14,6 +14,9 @@ var arm_rotation_end = 22
 
 var angular_velocity = 0
 
+var golden = 1
+var golden_size = 0.2
+
 var record_id = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -21,6 +24,7 @@ func _ready():
     randomize()
     #print("ok")
     load_record(0)
+    #set_golden(1.5, 0.2)
     #print("ok")
     #$Music.play()
     #$Music.pitch_scale = pitch
@@ -28,16 +32,20 @@ func _ready():
 
 func _input(event):
     pass
-#    if event.is_action_pressed("left"):
-#        $Music.seek($Music.get_playback_position()-30)
-#    if event.is_action_pressed("right"):
-#        $Music.seek($Music.get_playback_position()+30)
+    if event.is_action_pressed("left"):
+        $Music.seek($Music.get_playback_position()-30)
+    if event.is_action_pressed("right"):
+        $Music.seek($Music.get_playback_position()+30)
     if event.is_action_pressed("next"):
+        $RecordPlayer/Player.global_position.x = 1800
+        game.state.points = 9999
         next()
     if event.is_action_pressed("prev"):
+        $RecordPlayer/Player.global_position.x = 1800
+        game.state.points = 9999
         prev()
-#    if event.is_action_pressed("ui_accept"):
-#        angular_velocity = 1
+    if event.is_action_pressed("ui_accept"):
+        angular_velocity = 1
 
 func _process(delta):
     $Points.text = str(game.state.points) + "/" + str((record_id+1)*10)
@@ -63,7 +71,7 @@ func _process(delta):
     
     # friction
     angular_velocity -= delta*angular_velocity*0.02
-    
+    angular_velocity = max(min(2, angular_velocity), 0)
     
     pitch = angular_velocity
     #pitch = lerp(pitch, new_pitch, 0.005)
@@ -72,7 +80,7 @@ func _process(delta):
     #var db = linear2db(f.length())*10+600
     $RecordPlayer/Speed/Slider.position.x = $RecordPlayer/Speed/Line.points[0].x + min(($RecordPlayer/Speed/Line.points[1].x-$RecordPlayer/Speed/Line.points[0].x),max(0,pitch*0.5*($RecordPlayer/Speed/Line.points[1].x-$RecordPlayer/Speed/Line.points[0].x)))
     if golden():
-        $RecordPlayer/Speed/Slider.modulate = Color("b9b551")
+        $RecordPlayer/Speed/Slider.modulate = Color("c4bf37")
     else:
         $RecordPlayer/Speed/Slider.modulate = Color("ffffff")  
     
@@ -86,21 +94,22 @@ func _process(delta):
     #print(pitch)
     
     if golden():
-        $Music.pitch_scale = 1
-        $Static.pitch_scale = 1
-    elif pitch < 1:
-        $Music.pitch_scale = pitch/0.9
-        $Static.pitch_scale = abs(pitch/0.9)
-    elif pitch > 1:
-        $Music.pitch_scale = pitch/1.1
-        $Static.pitch_scale = abs(pitch/1.1)
+        $Music.pitch_scale = golden
+        $Static.pitch_scale = golden
+    elif pitch < golden:
+        $Music.pitch_scale = pitch*(golden/(golden-golden_size/2))
+        $Static.pitch_scale = $Music.pitch_scale
+    elif pitch > golden:
+        $Music.pitch_scale = pitch*(golden/(golden+golden_size/2))
+        $Static.pitch_scale = $Music.pitch_scale
         
     
     $RecordPlayer/Record.rotation += delta*angular_velocity
     #$RecordPlayer/Player.rotation -= delta*angular_velocity
     
     var progress = $Music.get_playback_position()/$Music.get_stream().get_length()
-    $RecordPlayer/Arm.rotation_degrees = arm_rotation_start + (arm_rotation_end-arm_rotation_start)*progress
+    var target_rot = arm_rotation_start + (arm_rotation_end-arm_rotation_start)*progress
+    $RecordPlayer/Arm.rotation_degrees = lerp($RecordPlayer/Arm.rotation_degrees, target_rot, 0.1)
 
     prev_m = m
 
@@ -126,7 +135,15 @@ func pull_with(t):
         t.move(forward*angular_velocity*to_hamster.length())
     
 func golden():
-    return pitch > 0.9 and pitch < 1.1
+    return pitch > golden-golden_size/2 and pitch < golden+golden_size/2
+
+func set_golden(g, gs):
+    golden = g
+    golden_size = gs
+    var a = $RecordPlayer/Speed/Line.points[0].x
+    var b = $RecordPlayer/Speed/Line.points[1].x
+    $RecordPlayer/Speed/Line2.points[0].x = a+(b-a)*0.5*(golden-golden_size/2)
+    $RecordPlayer/Speed/Line2.points[1].x = a+(b-a)*0.5*(golden+golden_size/2)
 
 func records():
     return ["20000-pixels", "1room", "bloody", "spring-clean", "splendid-adventures", "writespace", "artisan-artefacts", "capitalist-piggies", "wurst-day-ever"]
@@ -167,28 +184,38 @@ func load_record(n):
         file.close()
     else:
         $Cover/Label.text = ""
-    $Cover.position.y = 1000
-    $Cover.down = false
+    $Cover.showCover()
     
     for t in get_tree().get_nodes_in_group("powerup"):
         t.queue_free()
     for t in get_tree().get_nodes_in_group("powerdown"):
         t.queue_free()
     $RecordPlayer/Record.rotation = 0
-    angular_velocity = 0.00001
+    #angular_velocity = 0.00001
     var p = $RecordPlayer/Player.global_position
     if p.x < 200:
         $RecordPlayer/Player.position.x += 1920 - 500
     elif p.x > 1920-200:
         $RecordPlayer/Player.position.x -= 1920 - 500
+    
+    set_golden(golden, lerp(0.2, 0.02, 1.0*record_id/len(records())))
+    
 func next(body=null):
     if unlocked() > record_id:
-        record_id = (record_id+1)%len(records())
+        record_id = (record_id+1+len(records()))%len(records())
         load_record(record_id)
 
 func prev(body=null):
-    record_id = (record_id-1)%len(records())
+    record_id = (record_id-1+len(records()))%len(records())
     load_record(record_id)
 
 func unlocked():
     return floor(game.state.points / 10)
+
+func initiate_reset():
+    $ResetTimer.start()
+
+
+func reset_arm():
+    $Music.seek(0)
+    $Music.play()
