@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://clip_label.tres" type="Material" id=1]
 [ext_resource path="res://main.gd" type="Script" id=2]
+[ext_resource path="res://static.ogg" type="AudioStream" id=3]
 [ext_resource path="res://montserrat-bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://arm.png" type="Texture" id=8]
@@ -25,6 +26,9 @@ extents = Vector2( 12.9194, 537.076 )
 script = ExtResource( 2 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+
+[node name="Static" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 
 [node name="RecordPlayer" type="Node2D" parent="."]
 position = Vector2( 980.974, 548.929 )
@@ -152,6 +156,7 @@ __meta__ = {
 }
 
 [node name="Display" type="Node2D" parent="."]
+visible = false
 
 [node name="LCD" type="ColorRect" parent="Display"]
 margin_left = 1085.0
@@ -165,27 +170,44 @@ __meta__ = {
 }
 
 [node name="RecordName" type="Label" parent="Display/LCD"]
-margin_left = 7.48547
+margin_left = 12.3501
 margin_top = 5.57285
-margin_right = 10006.5
+margin_right = 10011.3
 margin_bottom = 84.5728
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "no record loaded"
-uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Points" type="Label" parent="."]
-margin_left = 26.0012
-margin_top = 23.4149
-margin_right = 590.001
-margin_bottom = 102.415
+margin_left = 1325.26
+margin_top = 50.9883
+margin_right = 1889.26
+margin_bottom = 129.988
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "0"
+align = 2
 uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Unlock" type="Label" parent="."]
+visible = false
+margin_left = 1334.08
+margin_top = 378.56
+margin_right = 1898.08
+margin_bottom = 635.56
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "next
+level
+unlocked!
+->"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

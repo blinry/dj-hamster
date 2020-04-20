@@ -5,7 +5,6 @@ var state = {}
 
 func _ready():
     load_state()
-    state.points = 0
     
 func _initial_state():
     return {"points": 0}

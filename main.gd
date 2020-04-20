@@ -27,19 +27,24 @@ func _ready():
     #spectrum = AudioServer.get_bus_effect_instance(0,0)
 
 func _input(event):
-#    if event.is_action_pressed("left"):
-#        $AudioStreamPlayer2D.seek($AudioStreamPlayer2D.get_playback_position()-30)
-#    if event.is_action_pressed("right"):
-#        $AudioStreamPlayer2D.seek($AudioStreamPlayer2D.get_playback_position()+30)
-    if event.is_action_pressed("next"):
-        next()
-    if event.is_action_pressed("prev"):
-        prev()
-    if event.is_action_pressed("ui_accept"):
-        angular_velocity = 1
+    pass
+    if event.is_action_pressed("left"):
+        $Music.seek($Music.get_playback_position()-30)
+    if event.is_action_pressed("right"):
+        $Music.seek($Music.get_playback_position()+30)
+#    if event.is_action_pressed("next"):
+#        next()
+#    if event.is_action_pressed("prev"):
+#        prev()
+#    if event.is_action_pressed("ui_accept"):
+#        angular_velocity = 1
 
 func _process(delta):
-    $Points.text = str(game.state.points)
+    $Points.text = str(game.state.points) + "/" + str((record_id+1)*10)
+    if unlocked() > record_id:
+        $Unlock.show()
+    else:
+        $Unlock.hide()
     
     var m = get_global_mouse_position()
     
@@ -65,7 +70,7 @@ func _process(delta):
     
     #var f = spectrum.get_magnitude_for_frequency_range(0,100,1)
     #var db = linear2db(f.length())*10+600
-    $RecordPlayer/Speed/Slider.position.x = $RecordPlayer/Speed/Line.points[0].x + max(0,pitch*0.5*($RecordPlayer/Speed/Line.points[1].x-$RecordPlayer/Speed/Line.points[0].x))
+    $RecordPlayer/Speed/Slider.position.x = $RecordPlayer/Speed/Line.points[0].x + min(($RecordPlayer/Speed/Line.points[1].x-$RecordPlayer/Speed/Line.points[0].x),max(0,pitch*0.5*($RecordPlayer/Speed/Line.points[1].x-$RecordPlayer/Speed/Line.points[0].x)))
     if golden():
         $RecordPlayer/Speed/Slider.modulate = Color("b9b551")
     else:
@@ -82,10 +87,14 @@ func _process(delta):
     
     if golden():
         $Music.pitch_scale = 1
+        $Static.pitch_scale = 1
     elif pitch < 1:
         $Music.pitch_scale = pitch/0.9
+        $Static.pitch_scale = abs(pitch/0.9)
     elif pitch > 1:
         $Music.pitch_scale = pitch/1.1
+        $Static.pitch_scale = abs(pitch/1.1)
+        
     
     $RecordPlayer/Record.rotation += delta*angular_velocity
     #$RecordPlayer/Player.rotation -= delta*angular_velocity
@@ -97,13 +106,13 @@ func _process(delta):
 
 
     var name = records()[record_id]
-    if randi() % 400 == 0 and golden() and len(get_tree().get_nodes_in_group("powerup")) < 3:
+    if randi() % 200 == 0 and golden() and len(get_tree().get_nodes_in_group("powerup")) < 3:
         var c = preload("res://powerup.tscn").instance()
         c.position = Vector2(rand_range(-400, 400), rand_range(-400, 400))
         c.find_node("Image").texture = load("res://records/"+name+"/good.png")
         c.find_node("PickupSound").set_stream(load("res://records/"+name+"/good.wav"))
         $RecordPlayer.add_child(c)
-    if randi() % 400 == 0 and golden() and len(get_tree().get_nodes_in_group("powerdown")) < 3:
+    if randi() % 200 == 0 and golden() and len(get_tree().get_nodes_in_group("powerdown")) < 3:
         var c = preload("res://powerdown.tscn").instance()
         c.position = Vector2(rand_range(-400, 400), rand_range(-400, 400))
         c.find_node("Image").texture = load("res://records/"+name+"/bad.png")
@@ -147,6 +156,8 @@ func load_record(n):
     angular_velocity = 0.00001
     $Music.pitch_scale = pitch
     $Music.play()
+    $Static.pitch_scale = pitch
+    $Static.play()
     $Display/LCD/RecordName.text = name
     
     for t in get_tree().get_nodes_in_group("powerup"):
@@ -160,11 +171,14 @@ func load_record(n):
         $RecordPlayer/Player.position.x += 1920 - 500
     elif p.x > 1920-200:
         $RecordPlayer/Player.position.x -= 1920 - 500
-    print($RecordPlayer/Player.global_position.x)
 func next(body=null):
-    record_id = (record_id+1)%len(records())
-    load_record(record_id)
+    if unlocked() > record_id:
+        record_id = (record_id+1)%len(records())
+        load_record(record_id)
 
 func prev(body=null):
     record_id = (record_id-1)%len(records())
     load_record(record_id)
+
+func unlocked():
+    return floor(game.state.points / 10)
