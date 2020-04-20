@@ -32,21 +32,21 @@ func _input(event):
 #    if event.is_action_pressed("right"):
 #        $AudioStreamPlayer2D.seek($AudioStreamPlayer2D.get_playback_position()+30)
     if event.is_action_pressed("next"):
-        record_id = (record_id+1)%len(records())
-        load_record(record_id)
+        next()
     if event.is_action_pressed("prev"):
-        record_id = (record_id-1)%len(records())
-        load_record(record_id)
+        prev()
     if event.is_action_pressed("ui_accept"):
         angular_velocity = 1
 
 func _process(delta):
+    $Points.text = str(game.state.points)
+    
     var m = get_global_mouse_position()
     
     #var new_pitch = prev_m.distance_to(m)/50
     
     if $RecordPlayer/Player.global_position.distance_to($RecordPlayer/Record.global_position) < 500:
-        var rotational_inertia = 100
+        var rotational_inertia = 50
         var angular_acceleration = $RecordPlayer/Player.torque/rotational_inertia
         angular_velocity += angular_acceleration
     
@@ -56,8 +56,9 @@ func _process(delta):
     for t in get_tree().get_nodes_in_group("powerdown"):
         pull_with(t)
     
+    # friction
+    angular_velocity -= delta*angular_velocity*0.02
     
-    angular_velocity -= 0.05*delta*angular_velocity
     
     pitch = angular_velocity
     #pitch = lerp(pitch, new_pitch, 0.005)
@@ -96,13 +97,13 @@ func _process(delta):
 
 
     var name = records()[record_id]
-    if randi() % 100 == 0 and golden() and len(get_tree().get_nodes_in_group("powerup")) < 3:
+    if randi() % 400 == 0 and golden() and len(get_tree().get_nodes_in_group("powerup")) < 3:
         var c = preload("res://powerup.tscn").instance()
         c.position = Vector2(rand_range(-400, 400), rand_range(-400, 400))
         c.find_node("Image").texture = load("res://records/"+name+"/good.png")
         c.find_node("PickupSound").set_stream(load("res://records/"+name+"/good.wav"))
         $RecordPlayer.add_child(c)
-    if randi() % 100 == 0 and golden() and len(get_tree().get_nodes_in_group("powerdown")) < 3:
+    if randi() % 400 == 0 and golden() and len(get_tree().get_nodes_in_group("powerdown")) < 3:
         var c = preload("res://powerdown.tscn").instance()
         c.position = Vector2(rand_range(-400, 400), rand_range(-400, 400))
         c.find_node("Image").texture = load("res://records/"+name+"/bad.png")
@@ -118,10 +119,10 @@ func pull_with(t):
 func golden():
     return pitch > 0.9 and pitch < 1.1
 
-func records2():
-    return ["darkest-child","digya"]
-
 func records():
+    return ["20000-pixels", "1room", "bloody", "spring-clean", "splendid-adventures", "writespace", "artisan-artefacts", "capitalist-piggies", "wurst-day-ever"]
+
+func records2():
     #var tscn_regex = RegEx.new()
     #tscn_regex.compile("\\.ogg$")
     var levels = []
@@ -146,4 +147,24 @@ func load_record(n):
     angular_velocity = 0.00001
     $Music.pitch_scale = pitch
     $Music.play()
-    $RecordName.text = name
+    $Display/LCD/RecordName.text = name
+    
+    for t in get_tree().get_nodes_in_group("powerup"):
+        t.queue_free()
+    for t in get_tree().get_nodes_in_group("powerdown"):
+        t.queue_free()
+    $RecordPlayer/Record.rotation = 0
+    angular_velocity = 0.00001
+    var p = $RecordPlayer/Player.global_position
+    if p.x < 200:
+        $RecordPlayer/Player.position.x += 1920 - 500
+    elif p.x > 1920-200:
+        $RecordPlayer/Player.position.x -= 1920 - 500
+    print($RecordPlayer/Player.global_position.x)
+func next(body=null):
+    record_id = (record_id+1)%len(records())
+    load_record(record_id)
+
+func prev(body=null):
+    record_id = (record_id-1)%len(records())
+    load_record(record_id)

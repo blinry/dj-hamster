@@ -5,9 +5,10 @@ var state = {}
 
 func _ready():
     load_state()
+    state.points = 0
     
 func _initial_state():
-    return {}
+    return {"points": 0}
     
 func save_state() -> bool:
     var savegame = File.new()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://records/20000-pixels/bad.png" type="Texture" id=1]
-[ext_resource path="res://powerup.gd" type="Script" id=2]
+[ext_resource path="res://powerdown.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 80.0
@@ -15,9 +15,9 @@ z_index = 1
 script = ExtResource( 2 )
 
 [node name="Image" type="TextureRect" parent="."]
-margin_left = -81.0
+margin_left = -78.5536
 margin_top = -149.0
-margin_right = 89.0
+margin_right = 91.4464
 margin_bottom = 8.0
 texture = ExtResource( 1 )
 expand = true
@@ -31,4 +31,9 @@ position = Vector2( 3.58116, -63.7594 )
 shape = SubResource( 1 )
 
 [node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
+volume_db = 5.0
+
+[node name="Life" type="Timer" parent="."]
+wait_time = 10.0
 [connection signal="body_entered" from="." to="." method="collect"]
+[connection signal="timeout" from="Life" to="." method="die"]

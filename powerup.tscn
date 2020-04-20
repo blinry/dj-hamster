@@ -31,4 +31,9 @@ position = Vector2( 4.08136, -65.4108 )
 shape = SubResource( 1 )
 
 [node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
+volume_db = 5.0
+
+[node name="Life" type="Timer" parent="."]
+wait_time = 10.0
 [connection signal="body_entered" from="." to="." method="collect"]
+[connection signal="timeout" from="Life" to="." method="die"]
