@@ -1,0 +1,9 @@
+== Wurst Day Ever ==
+
+A solo entry for the Global Game Jam 2020, at the SAE Institute Berlin. This is a puzzle game where you push around pieces of sausage on an island. Repair them all to win! This is another game with simple rules, but super interesting consequences, and got a lot of praise at the jam.
+
+You can play it in your browser at morr.cc/wurst-day-ever/.
+
+I asked Winnie whether he could make some music for this game, and he made some beautiful music! The song is "Sausage Salsa", CC BY-NC-SA 4.0.
+
+This is the last record in this collection. Thanks for playing "DJ Hamster"! <3

@@ -1,0 +1,7 @@
+== 20,000 Pixels Into The Sea ==
+
+Leslie and I made this game in 2016 for Ludum Dare 36. This was my second entry for a game jam ever (after the compo entry "You're a Floor Lamp Now", which had no music).
+
+"20,000" is a sailing simulator, that can teach you how to sail against the wind! Rescue people, and be aware of the sea monsters! The song is called "Digya", and was composed by Kevin MacLeod.
+
+Learn more about the game at morr.cc/20000-pixels/

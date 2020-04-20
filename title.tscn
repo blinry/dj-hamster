@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://montserrat-bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://title.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 200
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 70
+font_data = ExtResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 12.9194, 537.076 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 322.0
+margin_top = 19.25
+margin_right = 1552.0
+margin_bottom = 264.25
+custom_fonts/font = SubResource( 1 )
+text = "DJ Hamster"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 301.0
+margin_top = 239.75
+margin_right = 1531.0
+margin_bottom = 592.75
+custom_fonts/font = SubResource( 2 )
+text = "made by blinry
+in 72 hours
+for Ludum Dare 46
+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 920.75, 857.25 )
+free = true
+
+[node name="Next" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Next"]
+position = Vector2( 1965.96, 539.955 )
+shape = SubResource( 4 )
+[connection signal="body_entered" from="Next" to="." method="_on_Next_body_entered"]

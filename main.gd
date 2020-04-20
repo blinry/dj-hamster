@@ -28,14 +28,14 @@ func _ready():
 
 func _input(event):
     pass
-    if event.is_action_pressed("left"):
-        $Music.seek($Music.get_playback_position()-30)
-    if event.is_action_pressed("right"):
-        $Music.seek($Music.get_playback_position()+30)
-#    if event.is_action_pressed("next"):
-#        next()
-#    if event.is_action_pressed("prev"):
-#        prev()
+#    if event.is_action_pressed("left"):
+#        $Music.seek($Music.get_playback_position()-30)
+#    if event.is_action_pressed("right"):
+#        $Music.seek($Music.get_playback_position()+30)
+    if event.is_action_pressed("next"):
+        next()
+    if event.is_action_pressed("prev"):
+        prev()
 #    if event.is_action_pressed("ui_accept"):
 #        angular_velocity = 1
 
@@ -158,7 +158,17 @@ func load_record(n):
     $Music.play()
     $Static.pitch_scale = pitch
     $Static.play()
-    $Display/LCD/RecordName.text = name
+    
+    var fname = "res://records/"+name+"/text.txt"
+    var file = File.new()
+    if file.file_exists(fname):
+        file.open(fname, File.READ)
+        $Cover/Label.text = file.get_as_text()
+        file.close()
+    else:
+        $Cover/Label.text = ""
+    $Cover.position.y = 1000
+    $Cover.down = false
     
     for t in get_tree().get_nodes_in_group("powerup"):
         t.queue_free()

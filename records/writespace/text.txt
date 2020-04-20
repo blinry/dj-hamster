@@ -1,0 +1,11 @@
+== Writespace ==
+
+Made in 2018 with Kiki and larkinia. Lena and rohieb jumped in at the end and helped making the game look pretttty! <3
+
+In this game, you are a typewriter, typing your way through strange scrolls of parchment. When you type "down" or "up", you change the direction you type in!
+
+Probably the most successful Ludum Dare entry I've been part of, getting 1st place in "Innovation", 3rd place in "Fun", and 2nd place overall (in the Jam category). Has been covered by several indie game sites, and some streamers recorded Let's Plays!
+
+The song is "Darkest Child" by Kevin MacLeod, CC BY 3.0.
+
+A lot of pistachios were harmed in the making of this game.
