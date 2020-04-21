@@ -48,11 +48,11 @@ func _input(event):
         angular_velocity = 1
 
 func _process(delta):
-    $Points.text = str(game.state.points) + "/" + str((record_id+1)*10)
+    $RecordPlayer/Display/Points.text = str(game.state.points) + "/" + str((record_id+1)*10)
     if unlocked() > record_id:
-        $Unlock.show()
+        $NextRecord.showIt()
     else:
-        $Unlock.hide()
+        $NextRecord.showMe = false
     
     var m = get_global_mouse_position()
     
@@ -117,17 +117,25 @@ func _process(delta):
     var name = records()[record_id]
     if randi() % 200 == 0 and golden() and len(get_tree().get_nodes_in_group("powerup")) < 3:
         var c = preload("res://powerup.tscn").instance()
-        c.position = Vector2(rand_range(-400, 400), rand_range(-400, 400))
+        c.position = spawn_point()
         c.find_node("Image").texture = load("res://records/"+name+"/good.png")
         c.find_node("PickupSound").set_stream(load("res://records/"+name+"/good.wav"))
         $RecordPlayer.add_child(c)
     if randi() % 200 == 0 and golden() and len(get_tree().get_nodes_in_group("powerdown")) < 3:
         var c = preload("res://powerdown.tscn").instance()
-        c.position = Vector2(rand_range(-400, 400), rand_range(-400, 400))
+        c.position = spawn_point()
         c.find_node("Image").texture = load("res://records/"+name+"/bad.png")
         c.find_node("PickupSound").set_stream(load("res://records/"+name+"/bad.wav"))
         $RecordPlayer.add_child(c)
-    
+
+func spawn_point():
+    var pp = $RecordPlayer/Player.global_position
+    var pp2 = $RecordPlayer/Arm/StaticBody2D.global_position
+    var p = pp
+    while p.distance_to(pp) < 200 or p.distance_to(pp2) < 250:
+        p = $RecordPlayer.global_position + Vector2(rand_range(-500, 450), rand_range(-350, 350))
+    return p - $RecordPlayer.global_position
+
 func pull_with(t):
     if t.global_position.distance_to($RecordPlayer/Record.global_position) < 500:
         var to_hamster = t.global_position-$RecordPlayer/Record.global_position
@@ -193,10 +201,10 @@ func load_record(n):
     $RecordPlayer/Record.rotation = 0
     #angular_velocity = 0.00001
     var p = $RecordPlayer/Player.global_position
-    if p.x < 200:
-        $RecordPlayer/Player.position.x += 1920 - 500
-    elif p.x > 1920-200:
-        $RecordPlayer/Player.position.x -= 1920 - 500
+#    if p.x < 200:
+#        $RecordPlayer/Player.position.x += 1920 - 500
+#    elif p.x > 1920-200:
+#        $RecordPlayer/Player.position.x -= 1920 - 500
     
     set_golden(golden, lerp(0.2, 0.02, 1.0*record_id/len(records())))
     

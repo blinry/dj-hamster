@@ -13,6 +13,7 @@ radius = 80.0
 position = Vector2( -0.153931, -0.116867 )
 scale = Vector2( 0.408757, 0.408757 )
 z_index = 1
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="Image" type="TextureRect" parent="."]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/tada.wav-66d00d9f01cf895891744d9ff01811c3.sample"
+
+[deps]
+
+source_file="res://tada.wav"
+dest_files=[ "res://.import/tada.wav-66d00d9f01cf895891744d9ff01811c3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

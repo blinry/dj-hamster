@@ -1,5 +1,7 @@
-== Spring Clean - DO NOT CROSS ==
+~ Spring Clean - DO NOT CROSS ~
 
-Made together with Kiki in the end of 2017 for Ludum Dare 40. Character graphics by Mai, soundtrack by Winnie! This was the first Ludum Dare with the later members of Pistachio Studios, and it had a sister project, created under the same roof: Kittychaos! I distincly remember that during this weekend, we woke up one day and everything was covered in snow! ^_^
+Made together with Kiki in the end of 2017 for Ludum Dare 40. Character graphics by Mai, soundtrack by Winnie!
 
-The songs on this record are called "Waiting Cat", "Cat House", "Catter House", and "Cattest House" (yes, don't you feel the level progression?! :D). CC BY-NC-SA 4.0.
+This was the first Ludum Dare with the later members of Pistachio Studios, who were working on two different games under the same roof! I distinctly remember that during this weekend, we woke up one day and everything was covered in snow! <3
+
+The songs on this record are called "Waiting Cat", "Cat House", "Catter House", and "Cattest House". Yes, don't you feel the level progression?! :D

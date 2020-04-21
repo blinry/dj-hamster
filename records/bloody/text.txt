@@ -1,7 +1,9 @@
-== A Bloody Small World ==
+~ A Bloody Small World ~
+
+Made together with Moritz, Pecca, and Winnie for Ludum Dare 38. Sometimes we worked in my living room, sometimes remotely! I think we made a great team, complementing each other really well.
 
 This is a racing game that takes place inside a human blood stream. You are teaching a class of red blood cells how to take oxygen from the lungs to the organs.
 
-Made together with Moritz, Pecca, and Winnie for Ludum Dare 38. Find the game at morr.cc/bloody/.
+Winnie produced the soundtrack for this game. It consists of the songs "Blood Cell Intro", "Blood Cell Party", and "Blood Cell Blues".
 
-Winnie produced the soundtrack for this game. It consists of the songs "Blood Cell Intro", "Blood Cell Party", and "Blood Cell Blues" (CC BY-NC-SA 4.0).
+You can find the game at morr.cc/bloody/

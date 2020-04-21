@@ -1,7 +1,9 @@
-== Splendid Adventures on a Sunday Afternoon ==
+~ Splendid Adventures on a Sunday Afternoon ~
 
-This game is half platformer, half children's book. You jump around on words and sentences, and can make choices. Made in a large team with larkinia, Mai, rohieb, Winnie, and Bonus-Steffi. Ummm, we used SVG as a level format for this one. I don't want to talk about it.
+This game is half platformer, half children's book. You jump around on words and sentences, and can make choices.
 
-The soundtrack was made by Winnie and consists of the tracks "A Walk in the Forest", "After the Rain", "Ruins", and "Dream Land". CC BY-NC-SA 4.0.
+Made in a large team with larkinia, Mai, rohieb, Winnie, and Bonus-Steffi. One big perk of this weekend was the surprise barbecue! We used SVG as a level format for the game... I don't want to talk about it.
 
-Find the game at morr.cc/splendid-adventures/.
+The soundtrack was made by Winnie and consists of the tracks "A Walk in the Forest", "After the Rain", "Ruins", and "Dream Land".
+
+Find the game at morr.cc/splendid-adventures/

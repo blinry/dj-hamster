@@ -1,4 +1,4 @@
-name = "ld46"
+name = "dj-hamster"
 
 all: linux macos windows web
 

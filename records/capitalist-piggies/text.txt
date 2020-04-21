@@ -1,7 +1,9 @@
-== Capitalist Piggies ==
+~ Capitalist Piggies ~
 
 Made during my stay at the Recurse Center (a self-directed, community-driven educational retreat for programmers in New York City), together with Agustín, Alan, Byung, and Tim.
 
-This is a game about fast reactions, planning, and cute piggies! You play as a piggy bank that wants to escape a real bank, guarded by cute, but rather dangerous banker piggies. (You can lure them into traps!)
+This is a game about fast reactions, planning, and cute piggies! You play as a piggy bank that wants to escape a real bank, guarded by cute, but rather dangerous banker piggies.
 
-Music by (surprise, surprise) Kevin MacLeod, the second track is "Quirky Dog", and I can't for the life of me figure out what the first one is called. Let's call it "menu.mp3". Both are CC BY 3.0.
+Music by (surprise, surprise) Kevin MacLeod, the second track is "Quirky Dog", and I can't for the life of me figure out what the first one is called.
+
+The game is at morr.cc/capitalist-piggies/

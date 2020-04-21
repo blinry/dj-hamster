@@ -1,56 +1,98 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://montserrat-bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://DoctorJekyllNF.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://title.gd" type="Script" id=3]
+[ext_resource path="res://table.jpg" type="Texture" id=4]
+[ext_resource path="res://record.png" type="Texture" id=5]
+[ext_resource path="res://Nero.otf" type="DynamicFontData" id=6]
+[ext_resource path="res://paper.jpg" type="Texture" id=7]
+[ext_resource path="res://food.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 200
-font_data = ExtResource( 1 )
+outline_size = 20
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 231.655
 
 [sub_resource type="DynamicFont" id=2]
-size = 70
+size = 45
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 12.9194, 537.076 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="table" type="Sprite" parent="."]
+position = Vector2( 957.608, 556.942 )
+texture = ExtResource( 4 )
+
 [node name="Label" type="Label" parent="."]
-margin_left = 322.0
-margin_top = 19.25
-margin_right = 1552.0
-margin_bottom = 264.25
+margin_left = 280.098
+margin_top = 86.4176
+margin_right = 1814.1
+margin_bottom = 331.418
 custom_fonts/font = SubResource( 1 )
-text = "DJ Hamster"
+custom_colors/font_color = Color( 0.0588235, 0.760784, 0.203922, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 20
+text = "DJ  Hamster"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Label2" type="Label" parent="."]
-margin_left = 301.0
-margin_top = 239.75
-margin_right = 1531.0
-margin_bottom = 592.75
-custom_fonts/font = SubResource( 2 )
-text = "made by blinry
-in 72 hours
-for Ludum Dare 46
-"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 920.75, 857.25 )
-free = true
 
 [node name="Next" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Next"]
-position = Vector2( 1941.59, 541.309 )
-shape = SubResource( 4 )
+position = Vector2( 2015.59, 607.309 )
+shape = SubResource( 3 )
+
+[node name="record" type="Sprite" parent="."]
+position = Vector2( 2019.52, 607.926 )
+scale = Vector2( 0.820534, 0.820534 )
+texture = ExtResource( 5 )
+
+[node name="food2" type="Sprite" parent="."]
+position = Vector2( -70.4916, 614.951 )
+scale = Vector2( 0.748, 0.748 )
+texture = ExtResource( 9 )
+
+[node name="food" type="Sprite" parent="."]
+position = Vector2( 54.0403, 761.773 )
+rotation = -3.14159
+scale = Vector2( 0.904302, -0.904303 )
+texture = ExtResource( 9 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 941.448, 734.769 )
+free = true
+
+[node name="paper" type="Sprite" parent="."]
+position = Vector2( 936.97, 680.006 )
+scale = Vector2( 0.338555, 0.510495 )
+texture = ExtResource( 7 )
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 289.567
+margin_top = 442.027
+margin_right = 1579.57
+margin_bottom = 1149.03
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "A Celebration of
+Game Jam Music
+2016 – 2020
+
+Made by blinry
+in 72 Hours
+for Ludum Dare 46
+
+Click/Tap to Move"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="body_entered" from="Next" to="." method="_on_Next_body_entered"]
