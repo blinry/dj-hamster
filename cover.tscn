@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://title.gd" type="Script" id=3]
+[ext_resource path="res://table.jpg" type="Texture" id=4]
+[ext_resource path="res://record.png" type="Texture" id=5]
+[ext_resource path="res://Nero.otf" type="DynamicFontData" id=6]
+[ext_resource path="res://food.png" type="Texture" id=9]
+
+[sub_resource type="DynamicFont" id=3]
+size = 170
+outline_size = 20
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 231.655
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="table" type="Sprite" parent="."]
+position = Vector2( 957.608, 556.942 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 348.78
+margin_top = 202.879
+margin_right = 1882.78
+margin_bottom = 447.88
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.0588235, 0.760784, 0.203922, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 20
+text = "DJ  Hamster"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Next" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Next"]
+position = Vector2( 2015.59, 607.309 )
+shape = SubResource( 2 )
+
+[node name="record" type="Sprite" parent="."]
+position = Vector2( 1747.01, 945.381 )
+scale = Vector2( 1.13461, 1.13461 )
+texture = ExtResource( 5 )
+
+[node name="food2" type="Sprite" parent="."]
+position = Vector2( 104.187, 625.605 )
+scale = Vector2( 0.884467, 0.838899 )
+texture = ExtResource( 9 )
+
+[node name="food" type="Sprite" parent="."]
+position = Vector2( 320.306, 835.108 )
+rotation = -3.14159
+scale = Vector2( 1.43795, -1.30494 )
+texture = ExtResource( 9 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 900.932, 852.928 )
+scale = Vector2( 3, 3 )
+free = true
+[connection signal="body_entered" from="Next" to="." method="_on_Next_body_entered"]

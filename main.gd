@@ -32,20 +32,20 @@ func _ready():
 
 func _input(event):
     pass
-    if event.is_action_pressed("left"):
-        $Music.seek($Music.get_playback_position()-30)
-    if event.is_action_pressed("right"):
-        $Music.seek($Music.get_playback_position()+30)
-    if event.is_action_pressed("next"):
-        $RecordPlayer/Player.global_position.x = 1800
-        game.state.points = 9999
-        next()
-    if event.is_action_pressed("prev"):
-        $RecordPlayer/Player.global_position.x = 1800
-        game.state.points = 9999
-        prev()
-    if event.is_action_pressed("ui_accept"):
-        angular_velocity = 1
+#    if event.is_action_pressed("left"):
+#        $Music.seek($Music.get_playback_position()-30)
+#    if event.is_action_pressed("right"):
+#        $Music.seek($Music.get_playback_position()+30)
+#    if event.is_action_pressed("next"):
+#        $RecordPlayer/Player.global_position.x = 1800
+#        game.state.points = 9999
+#        next()
+#    if event.is_action_pressed("prev"):
+#        $RecordPlayer/Player.global_position.x = 1800
+#        game.state.points = 9999
+#        prev()
+#    if event.is_action_pressed("ui_accept"):
+#        angular_velocity = 1
 
 func _process(delta):
     $RecordPlayer/Display/Points.text = str(game.state.points) + "/" + str((record_id+1)*10)
@@ -206,7 +206,7 @@ func load_record(n):
 #    elif p.x > 1920-200:
 #        $RecordPlayer/Player.position.x -= 1920 - 500
     
-    set_golden(golden, lerp(0.2, 0.02, 1.0*record_id/len(records())))
+    set_golden(1, lerp(0.2, 0.02, 1.0*record_id/len(records())))
     
 func next(body=null):
     if unlocked() > record_id:

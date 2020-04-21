@@ -1,7 +1,7 @@
 extends Node
 
 var _file = "user://savegame.json"
-var state = {"points": 9}
+var state = {"points": 0}
 
 #func _ready():
 #    load_state()
